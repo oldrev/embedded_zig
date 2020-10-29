@@ -5,10 +5,16 @@ const VECT_TAB_OFFSET = 0x0;
 const PERIPH_BASE = 0x40000000;
 const APB2PERIPH_BASE = PERIPH_BASE + 0x10000;
 const AHBPERIPH_BASE = PERIPH_BASE + 0x20000;
+const GPIOA_BASE = APB2PERIPH_BASE + 0x0800;
+const GPIOB_BASE = APB2PERIPH_BASE + 0x0C00;
 const GPIOC_BASE = APB2PERIPH_BASE + 0x1000;
 const RCC_BASE = AHBPERIPH_BASE + 0x1000;
+pub const GPIO_PIN_12: u32 = 0x1000;
 pub const GPIO_PIN_13: u32 = 0x2000;
+pub const RCC_APB2Periph_GPIOA: u32 = 0x00000004;
+pub const RCC_APB2Periph_GPIOB: u32 = 0x00000008;
 pub const RCC_APB2Periph_GPIOC: u32 = 0x00000010;
+pub const RCC_APB2Periph_GPIOD: u32 = 0x00000020;
 const RCC_CR_HSEON: u32 = 0x00010000;
 const RCC_CR_HSERDY: u32 = 0x00020000;
 const HSE_STARTUP_TIMEOUT: u16 = 0x0500;
@@ -66,7 +72,10 @@ const FLASH_t = packed struct {
     WRPR: u32,
 };
 
+pub const GPIOA = @intToPtr(*volatile GPIO_t, GPIOA_BASE);
+pub const GPIOB = @intToPtr(*volatile GPIO_t, GPIOB_BASE);
 pub const GPIOC = @intToPtr(*volatile GPIO_t, GPIOC_BASE);
+pub const GPIOD = @intToPtr(*volatile GPIO_t, GPIOD_BASE);
 pub const RCC = @intToPtr(*volatile RCC_t, RCC_BASE);
 pub const FLASH = @intToPtr(*volatile FLASH_t, FLASH_R_BASE);
 
